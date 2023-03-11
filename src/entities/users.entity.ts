@@ -6,13 +6,13 @@ export class Users {
     @PrimaryGeneratedColumn("increment")
     id: number
 
-    @Column({ length: 45, unique: true  })
+    @Column({ length: 45, unique: true })
     email: string
 
     @Column({ length: 45}) 
     name: string
 
-    @Column()
+    @Column({ default: false })
     admin: boolean
 
     @Column({ length: 120 })
@@ -24,6 +24,6 @@ export class Users {
     @UpdateDateColumn() 
     updatedAt: Date
 
-    @DeleteDateColumn() 
-    deletedAt: Date
+    @DeleteDateColumn({ nullable: true }) 
+    deletedAt?: Date | null | undefined
 }
