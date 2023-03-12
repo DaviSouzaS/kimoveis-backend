@@ -3,7 +3,7 @@ import { AppDataSource } from "../data-source"
 import { Users } from "../entities"
 import { hash } from "bcryptjs"
 
-const createUserService = async (payload: iUserCreate): Promise<Users> => {
+export const createUserService = async (payload: iUserCreate): Promise<Users> => {
 
     const encryptedPass: string = await hash(payload.password, 10)    
 
@@ -17,4 +17,4 @@ const createUserService = async (payload: iUserCreate): Promise<Users> => {
     return user
 }
 
-export { createUserService }
+
