@@ -14,6 +14,10 @@ export const loginService = async (payload: iUserLogin): Promise<string> => {
         email: payload.email
     })
 
+    if (user?.deletedAt !== null) {
+        throw new AppError('Wrong email or password', 401)
+    }
+
     if (!user) {
         throw new AppError('Wrong email or password', 401)
     }
