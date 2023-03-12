@@ -2,7 +2,7 @@ import { createUserService } from "../services/createUser.service"
 import { Request, Response } from "express"
 import { iReturnUserSchema } from "../interfaces/createUser.interface"
 
-const createUserController = async (request: Request, response: Response): Promise<Response> => {
+export const createUserController = async (request: Request, response: Response): Promise<Response> => {
 
     const user: iReturnUserSchema = await createUserService(request.body)
 
@@ -12,4 +12,3 @@ const createUserController = async (request: Request, response: Response): Promi
   
 }
 
-export { createUserController }
