@@ -6,6 +6,8 @@ export const createUserController = async (request: Request, response: Response)
 
     const user: iReturnUserSchema = await createUserService(request.body)
 
+    console.log(user)
+
     delete user.password
 
     return response.status(201).json(user)

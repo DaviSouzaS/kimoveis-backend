@@ -8,7 +8,7 @@ export const loginController = async (request: Request, response: Response): Pro
 
     const token: string = await loginService(loginData)
 
-    return response.status(201).json({
+    return response.status(200).json({
         token: token
     })
 
