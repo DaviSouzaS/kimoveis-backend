@@ -8,5 +8,5 @@ type iReturnUserSchema = z.infer<typeof returnUserSchema>
 
 export { 
     iUserCreate,
-    iReturnUserSchema
+    iReturnUserSchema,
 }
