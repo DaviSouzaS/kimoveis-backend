@@ -3,7 +3,7 @@ import { AppError } from "../error"
 import jwt from "jsonwebtoken"
 import "dotenv/config"
 
-const validateToken = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
+export const validateToken = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
     
     const authToken = request.headers.authorization
 
@@ -29,7 +29,3 @@ const validateToken = async (request: Request, response: Response, next: NextFun
         }
     )
 }   
-
-export {
-    validateToken
-}
