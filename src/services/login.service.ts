@@ -1,6 +1,6 @@
 import { iUserLogin } from "../interfaces/login.interface"
 import { AppDataSource } from "../data-source"
-import { Users } from "../entities"
+import { User } from "../entities"
 import { AppError } from "../error"
 import { compare } from "bcryptjs"
 import jwt from "jsonwebtoken"
@@ -8,9 +8,9 @@ import "dotenv/config"
 
 export const loginService = async (payload: iUserLogin): Promise<string> => {
 
-    const usersRepo = AppDataSource.getRepository(Users)
+    const usersRepo = AppDataSource.getRepository(User)
 
-    const user: Users | null = await usersRepo.findOneBy({
+    const user: User | null = await usersRepo.findOneBy({
         email: payload.email
     })
 

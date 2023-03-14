@@ -1,15 +1,15 @@
 import { Request, Response, NextFunction } from "express"
 import { AppDataSource } from "../data-source"
-import { Categories } from "../entities"
+import { Category } from "../entities"
 import { AppError } from "../error"
 
 export const checkIfCategoryIsUnique = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
 
     const categoryName: string = request.body.name
 
-    const categoriesRepo = AppDataSource.getRepository(Categories)
+    const categoriesRepo = AppDataSource.getRepository(Category)
 
-    const category: Categories | null = await categoriesRepo.findOneBy({
+    const category: Category | null = await categoriesRepo.findOneBy({
         name: categoryName
     })
 

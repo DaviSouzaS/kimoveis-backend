@@ -1,10 +1,10 @@
 import { iCreateCategory } from "../interfaces/createCategory.interface"
 import { AppDataSource } from "../data-source"
-import { Categories } from "../entities"
+import { Category } from "../entities"
 
-export const createCategoryService = async (payload: iCreateCategory): Promise<Categories> => {
+export const createCategoryService = async (payload: iCreateCategory): Promise<Category> => {
 
-    const categoriesRepo = AppDataSource.getRepository(Categories)
+    const categoriesRepo = AppDataSource.getRepository(Category)
     const category = categoriesRepo.create(payload)
   
     await categoriesRepo.save(category)

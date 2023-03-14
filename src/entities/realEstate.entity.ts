@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm"
-import { Categories } from "./categories.entity"
-import { Addresses } from "./addresses.entity"
+import { Category } from "./categories.entity"
+import { Address } from "./addresses.entity"
 
 @Entity("real_estate")
 export class RealEstate {
@@ -11,8 +11,8 @@ export class RealEstate {
     @Column({ default: false, nullable: true })
     sold: boolean
 
-    @Column({ type: "decimal" })
-    value: number
+    @Column({ type: "decimal", precision: 12, scale: 2, default: 0 })
+    value: number | string
 
     @Column()
     size: number
@@ -23,11 +23,11 @@ export class RealEstate {
     @UpdateDateColumn()
     updatedAt: Date
 
-    @OneToOne(() => Addresses, { nullable: false })
+    @OneToOne(() => Address, { nullable: false })
     @JoinColumn()
-    addresses: Addresses 
+    addresses: Address 
 
-    @ManyToOne(() => Categories, { nullable: true })
-    categories: Categories
+    @ManyToOne(() => Category, { nullable: true })
+    categories: Category
 
 }

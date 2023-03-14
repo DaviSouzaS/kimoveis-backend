@@ -1,3 +1,4 @@
+import { checkIfEmailExist } from "../middlewares/checkIfEmailIsUnique.middleware"
 import { checkIfUserIsAdmin } from "../middlewares/checkIfUserIsAdmin.middleware"
 import { readAllUsersController } from "../controllers/readAllUsers.controller"
 import { usersPermissions } from "../middlewares/usersPermissions.middlewares"
@@ -13,10 +14,10 @@ import { Router } from "express"
 
 export const userRouter: Router = Router()
 
-userRouter.post('', validateData(createUserSchema), createUserController)
+userRouter.post('', validateData(createUserSchema), checkIfEmailExist, createUserController)
 
-userRouter.get('', validateToken, checkIfUserIsAdmin, readAllUsersController)
+userRouter.get('', checkIfUserIsAdmin, validateToken, readAllUsersController)
 
-userRouter.patch('/:id', validateData(updateUserSchema), validateToken, usersPermissions, checkIfUserExist,  updateUserController)
+userRouter.patch('/:id', validateData(updateUserSchema), validateToken, checkIfUserExist, usersPermissions, updateUserController)
 
-userRouter.delete('/:id', validateToken, checkIfUserIsAdmin, checkIfUserExist, deleteUserController)
+userRouter.delete('/:id', checkIfUserExist, validateToken, checkIfUserIsAdmin, deleteUserController)

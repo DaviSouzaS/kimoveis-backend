@@ -1,11 +1,11 @@
 import { AppDataSource } from "../data-source"
-import { Users } from "../entities"
+import { User } from "../entities"
 
 export const readAllUsersService = async () => {
 
-    const usersRepo = AppDataSource.getRepository(Users)
+    const usersRepo = AppDataSource.getRepository(User)
 
-    const allUsers: Users[] = await usersRepo.find({select: ["id", "name", "email", "admin", "createdAt", "updatedAt", "deletedAt"]})
+    const allUsers: User[] = await usersRepo.find({select: ["id", "name", "email", "admin", "createdAt", "updatedAt", "deletedAt"]})
 
     return allUsers
 }
