@@ -1,10 +1,10 @@
 import { readAllUsersService } from "../services/readAllUsers.service"
 import { Request, Response } from "express"
-import { Users } from "../entities"
+import { User } from "../entities"
 
 export const readAllUsersController = async (request: Request, response: Response): Promise<Response> => {
 
-   const users: Users[] = await readAllUsersService()
+   const users: User[] = await readAllUsersService()
 
     return response.status(200).json(users)
 }

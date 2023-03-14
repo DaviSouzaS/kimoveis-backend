@@ -1,9 +1,9 @@
 import { updateUserSchema } from "../schemas/updateUser.schema"
 import { DeepPartial } from "typeorm"
-import { Users } from "../entities"
+import { User } from "../entities"
 import { z } from "zod"
 
-type iUserUpdate = DeepPartial<Users>
+type iUserUpdate = DeepPartial<User>
 
 type iUserUpdateReturn = z.infer<typeof updateUserSchema>
 

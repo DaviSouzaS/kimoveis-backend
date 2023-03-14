@@ -1,12 +1,12 @@
 import { iUserUpdate } from "../interfaces/updateUser.interface"
 import { AppDataSource } from "../data-source"
-import { Users } from "../entities"
+import { User } from "../entities"
 import { hash } from "bcryptjs"
 import { AppError } from "../error"
 
-export const updateUserService = async (id: number, payload: iUserUpdate): Promise<Users | null> => {
+export const updateUserService = async (id: number, payload: iUserUpdate): Promise<User | null> => {
 
-    const usersRepo = AppDataSource.getRepository(Users)
+    const usersRepo = AppDataSource.getRepository(User)
 
     if (payload.password !== undefined) {
         payload.password = await hash(payload.password, 10)  

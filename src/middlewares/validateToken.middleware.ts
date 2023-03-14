@@ -8,7 +8,7 @@ export const validateToken = async (request: Request, response: Response, next: 
     const authToken = request.headers.authorization
 
     if (!authToken) {
-        throw new AppError('Missing authorization token', 401);
+        throw new AppError('Missing bearer token', 401);
     }
 
     const token: string = authToken.split(' ')[1];

@@ -1,10 +1,9 @@
 import { AppDataSource } from "../data-source"
-import { Users } from "../entities"
-import { AppError } from "../error"
+import { User } from "../entities"
 
 export const deleteUserService = async (payload: number): Promise<void> => {
 
-    const usersRepo = AppDataSource.getRepository(Users)
+    const usersRepo = AppDataSource.getRepository(User)
 
     const user = await usersRepo.findOneBy({id: payload})
 
