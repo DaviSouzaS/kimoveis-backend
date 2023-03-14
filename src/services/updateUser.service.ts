@@ -2,7 +2,6 @@ import { iUserUpdate } from "../interfaces/updateUser.interface"
 import { AppDataSource } from "../data-source"
 import { User } from "../entities"
 import { hash } from "bcryptjs"
-import { AppError } from "../error"
 
 export const updateUserService = async (id: number, payload: iUserUpdate): Promise<User | null> => {
 
