@@ -1,7 +1,7 @@
 import { AppDataSource } from "../data-source"
 import { User } from "../entities"
 
-export const readAllUsersService = async () => {
+export const readAllUsersService = async (): Promise<User[]> => {
 
     const usersRepo = AppDataSource.getRepository(User)
 
