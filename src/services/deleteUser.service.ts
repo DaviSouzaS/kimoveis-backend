@@ -1,11 +1,12 @@
 import { AppDataSource } from "../data-source"
+import { Repository } from "typeorm"
 import { User } from "../entities"
 
 export const deleteUserService = async (payload: number): Promise<void> => {
 
-    const usersRepo = AppDataSource.getRepository(User)
+    const usersRepo: Repository<User> = AppDataSource.getRepository(User)
 
-    const user = await usersRepo.findOneBy({id: payload})
+    const user: User | null = await usersRepo.findOneBy({id: payload})
 
     await usersRepo.softRemove(user!)
 }

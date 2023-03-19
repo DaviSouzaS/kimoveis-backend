@@ -6,6 +6,17 @@ const updateUserSchema = z.object({
     password: z.string().max(120).optional(),
 })
 
+const updatedUserReturnSchema = z.object({
+    id: z.number(),
+    email: z.string(),
+    name: z.string(),
+    admin: z.boolean(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+    deletedAt: z.string().nullable().optional()
+})
+
 export {
-    updateUserSchema
+    updateUserSchema,
+    updatedUserReturnSchema
 }
