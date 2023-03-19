@@ -1,19 +1,21 @@
-import { iUserUpdate } from "../interfaces/updateUser.interface"
+import { iUserUpdate, iUserUpdateWithoutPassword } from "../interfaces/updateUser.interface"
 import { AppDataSource } from "../data-source"
+import { Repository } from "typeorm"
 import { User } from "../entities"
-import { hash } from "bcryptjs"
 
-export const updateUserService = async (id: number, payload: iUserUpdate): Promise<User | null> => {
+export const updateUserService = async (id: number, payload: iUserUpdate): Promise<iUserUpdateWithoutPassword> => {
 
-    const usersRepo = AppDataSource.getRepository(User)
+    const usersRepo: Repository<User> = AppDataSource.getRepository(User)
+    const user: User = usersRepo.create({id, ...payload})
 
-    if (payload.password !== undefined) {
-        payload.password = await hash(payload.password, 10)  
-    }
+    await usersRepo.save(user)
 
-    const updateUser = await usersRepo.save({id, ...payload})
+    const updatedUser: User[] | null = await usersRepo.find({
+        select: ["id", "name", "email", "admin", "createdAt", "updatedAt", "deletedAt"],
+        where: {
+            id: id
+        }
+    })
 
-    const userId: number = updateUser.id
-
-    return await usersRepo.findOneBy({id: userId})
+    return updatedUser[0]
 }

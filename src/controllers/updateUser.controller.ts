@@ -1,7 +1,6 @@
+import { iUserUpdate, iUserUpdateWithoutPassword } from "../interfaces/updateUser.interface"
 import { updateUserService } from "../services/updateUser.service"
-import { iUserUpdate } from "../interfaces/updateUser.interface"
 import { Request, Response } from "express"
-import { User } from "../entities"
 
 export const updateUserController = async (request: Request, response: Response): Promise<Response> => {
 
@@ -9,9 +8,7 @@ export const updateUserController = async (request: Request, response: Response)
 
     const updateData: iUserUpdate = request.body
 
-    const updateUser: User | null = await updateUserService(id, updateData)
-
-    // delete updateUser.password
+    const updateUser: iUserUpdateWithoutPassword | null = await updateUserService(id, updateData)
 
     return response.status(200).json(updateUser)
 }
