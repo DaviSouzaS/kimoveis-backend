@@ -1,25 +1,20 @@
+import { iUserInfos } from "../interfaces/login.interface"
 import { Request, Response, NextFunction } from "express"
-import { AppDataSource } from "../data-source"
-import { User } from "../entities"
 import { AppError } from "../error"
+import jwt from "jsonwebtoken"
 
 export const checkIfUserIsAdmin = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
+    const userToken: string | undefined = request.headers.authorization
 
-    const logedUserId: number = parseInt(request.user.id) 
+    const token: string = userToken!.split(' ')[1]; 
+    const decoded: iUserInfos = jwt.verify(token, process.env.SECRET_KEY!) as iUserInfos
 
-    const usersRepo = AppDataSource.getRepository(User)
+    const userStatus: boolean = decoded.admin
 
-    const user: User | null = await usersRepo.findOneBy({
-        id: logedUserId
-    })
-
-    const userStatus = user?.admin
-
-    if (!userStatus) {
+    if (userStatus !== true) {
         throw new AppError("Insufficient permission", 403)
     }
 
     return next()
-
 }
 

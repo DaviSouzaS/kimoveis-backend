@@ -5,7 +5,7 @@ import "dotenv/config"
 
 export const validateToken = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
     
-    const authToken = request.headers.authorization
+    const authToken: string | undefined = request.headers.authorization
 
     if (!authToken) {
         throw new AppError('Missing bearer token', 401);

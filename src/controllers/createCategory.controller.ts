@@ -1,9 +1,10 @@
-import { Request, Response } from "express"
 import { createCategoryService } from "../services/createCategory.service"
+import { Request, Response } from "express"
+import { Category } from "../entities"
 
 export const createCategoryController = async (request: Request, response: Response): Promise<Response> => {
 
-    const category = await createCategoryService(request.body)
+    const category: Category = await createCategoryService(request.body)
 
     return response.status(201).json(category)
 }
