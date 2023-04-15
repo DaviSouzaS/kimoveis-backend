@@ -1,5 +1,6 @@
 import "express-async-errors"
 import { realEstateRouter } from "./routes/realEstate.router"
+import { schedulesRouter } from "./routes/schedules.router"
 import { categoryRouter } from "./routes/categories.router"
 import { loginRouter } from "./routes/login.router"
 import { userRouter } from "./routes/users.router"
@@ -16,6 +17,8 @@ app.use('/login', loginRouter)
 app.use('/categories', categoryRouter)
 
 app.use('/realEstate', realEstateRouter)
+
+app.use('/schedules', schedulesRouter)
 
 app.use(handleErrors)
 

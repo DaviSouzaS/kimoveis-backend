@@ -8,15 +8,15 @@ export class Schedule {
     @PrimaryGeneratedColumn("increment")
     id: number
 
-    @Column() 
-    date: Date
+    @Column({type: "date"}) 
+    date: string
 
-    @Column() 
-    hour: Date
+    @Column({type: "time"})
+    hour: string
 
-    @ManyToOne(() => RealEstate, { nullable: false }) 
+    @ManyToOne(() => RealEstate, (realEstate) => realEstate.schedules, { nullable: false }) 
     realEstate: RealEstate
 
-    @ManyToOne(() => User, { nullable: false }) 
-    users: User 
+    @ManyToOne(() => User, user => user.schedules) 
+    user: User 
 }

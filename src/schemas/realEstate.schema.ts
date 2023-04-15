@@ -16,7 +16,7 @@ const addressSchema = addressReturnSchema.omit({
 const realEstateReturnSchema = z.object({
     id: z.number(),
     value: z.number().or(z.string()), 
-    size: z.number(),
+    size: z.number().positive(),
     categoryId: z.number().optional().nullable(),
     address: addressSchema
 })
@@ -27,15 +27,15 @@ const realEstateSchema = realEstateReturnSchema.omit({
 
 const realEstateBodySchema = z.object({
     value: z.number().or(z.string()), 
-    size: z.number(),
+    size: z.number().positive(),
     category: z.number().optional().nullable(),
     address: addressSchema.optional()
 })
 
 const realEstateBody = z.object({
     value: z.number().or(z.string()),
-    size: z.number(),
-    address: addressSchema,
+    size: z.number().positive(),
+    address: addressSchema.required(),
     category: z.number().optional().nullable()
 })
 

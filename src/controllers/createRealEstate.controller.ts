@@ -1,4 +1,4 @@
-import { iAddressSchema, iRealEstateBodySchema } from "../interfaces/realEstate.interface"
+import { iAddressSchema, iRealEstateWithoutAddress } from "../interfaces/realEstate.interface"
 import { createRealEstateService } from "../services/createRealEstate.service"
 import { Request, Response } from "express"
 
@@ -6,13 +6,13 @@ export const createRealEstateController = async (request: Request, response: Res
 
     const address: iAddressSchema = request.body.address
 
-    const realEstate: iRealEstateBodySchema = request.body
+    const realEstateWithoutAddress: iRealEstateWithoutAddress = {
+        value: request.body.value,
+        size: request.body.size,
+        categoryId: request.body.category
+    }
 
-    delete realEstate.address
-
-    const realEstateWithoutPass:any = realEstate //PRECISO ENCONTRAR A TIPAGEM CORRETA 
-
-    const realEstateCreated = await createRealEstateService(realEstateWithoutPass, address)
+    const realEstateCreated = await createRealEstateService(realEstateWithoutAddress, address)
 
     return response.status(201).json(realEstateCreated)
 }
